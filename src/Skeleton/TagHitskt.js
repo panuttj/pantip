@@ -9,10 +9,7 @@ function TagHitskt() {
     return (
         <Box sx={{ border: '1px solid #FF385C', height: '500px', borderRadius: '20px', width: '320px' }}>
             <Box sx={{ height: '50px', backgroundColor: '#FF385C', borderTopLeftRadius: '19px', borderTopRightRadius: '19px', border: '1px solid #FF385C', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography style={{ fontSize: '20px', color: '#ffffff', fontWeight: '500' }}>
-                    แท็กฮิต
-                </Typography>
-
+                <Skeleton variant="text" animation="wave" sx={{ fontSize: '1rem', width: '80px' }} />
             </Box>
             {Array.from(new Array(10)).map((item, index) => (
                 <Box key={index}>

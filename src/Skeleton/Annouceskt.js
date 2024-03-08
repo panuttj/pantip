@@ -10,15 +10,15 @@ function Annouceskt({ isMobile }) {
                     <Skeleton variant="circular" animation="wave" width={40} height={40} />
                     <Skeleton variant="text" animation="wave" sx={{ fontSize: '1rem', width: '80px' }} />
                 </Box>
-                <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Box sx={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', gap: '5px' }}>
                     <Box>
-                        <Skeleton variant="rounded" animation="wave" width={440} height={150} />
+                        <Skeleton variant="rounded" animation="wave" width={isMobile ? 350 : 440} height={isMobile ? 140 : 150} />
                     </Box>
                     <Box>
-                        <Skeleton variant="rounded" animation="wave" width={440} height={150} />
+                        <Skeleton variant="rounded" animation="wave" width={isMobile ? 350 : 440} height={isMobile ? 140 : 150} />
                     </Box>
                     <Box>
-                        <Skeleton variant="rounded" animation="wave" width={440} height={150} />
+                        <Skeleton variant="rounded" animation="wave" width={isMobile ? 350 : 440} height={isMobile ? 140 : 150} />
                     </Box>
                 </Box>
             </Box>

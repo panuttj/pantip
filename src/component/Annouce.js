@@ -21,7 +21,7 @@ function Annouce({ isMobile }) {
                 </Box>
                 <Grid container spacing={2} >
                     {AnnouceData.map((data, index) => (
-                        <Grid item sm={12} lg={4}>
+                        <Grid key={index} item sm={12} lg={4}>
                             <Card sx={{ minWidth: '100%', height: '150px', border: '1px solid #F6F5F5', display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
                                 <CardContent>
                                     <Typography style={{ fontSize: '20px', color: '#FF385C', fontWeight: '500' }} >
@@ -31,7 +31,7 @@ function Annouce({ isMobile }) {
                                         {data.description}
                                     </Typography>
                                 </CardContent>
-                                <Box sx={{ marginTop: 'auto', display: 'flex', justifyContent: 'flex-end', paddingRight: '16px', paddingBottom: '16px' }}>
+                                <Box sx={{ marginTop: 'auto', display: 'flex', justifyContent: 'flex-end' }}>
                                     <Button>
                                         แสดงเพิ่มเติม
                                     </Button>

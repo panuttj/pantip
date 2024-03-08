@@ -21,32 +21,37 @@ import TagHitskt from './Skeleton/TagHitskt';
 import ClubsSkt from './Skeleton/ClubsSkt';
 import WebsitesSkt from './Skeleton/WebsitesSkt';
 import Highlight from './component/Highlight';
+import HighlightSkt from './Skeleton/HighlightSkt';
 
 function App() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
+  const [realtime, setRealtime] = useState(pantipRealtime)
+  const [pick, setPick] = useState(pantipPick)
+  const [hitz, setHitz] = useState(pantipHitz)
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(!loading)
-  //   }, 1000);
-  // }, [])
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(!loading)
+    }, 1000);
+  }, [])
 
   return (
     <div style={{ margin: 0, padding: 0, boxSizing: 'border-box' }}>
       <Navbar />
       <div style={{ marginTop: isMobile ? '80px' : '170px' }}  >
-        {loading ? <Annouce isMobile={isMobile} /> : <Annouceskt />}
-        {loading ? <Rooms isMobile={isMobile} /> : <Roomsskt />}
+        {loading ? <Annouce isMobile={isMobile} /> : <Annouceskt isMobile={isMobile} />}
+        {loading ? <Rooms isMobile={isMobile} /> : <Roomsskt isMobile={isMobile} />}
+        {loading ? <Highlight isMobile={isMobile} /> : <HighlightSkt isMobile={isMobile} />}
       </div>
-      <Highlight isMobile={isMobile} />
+
       <Box sx={{ position: 'relative' }}>
         <Grid container spacing={1} >
           <Grid item lg={9} xs={12} >
-            {loading ? <Content title={'Pantip Realtime'} contentData={pantipRealtime} icon={<TimelineIcon />} isMobile={isMobile} /> : <Contentskt />}
-            {loading ? <Content title={'Pantip Pick'} contentData={pantipPick} icon={<ThumbUpOffAltIcon />} isMobile={isMobile} /> : <Contentskt />}
-            {loading ? <Content title={'Pantip Hitz'} contentData={pantipHitz} icon={<WhatshotIcon />} isMobile={isMobile} /> : <Contentskt />}
+            {loading ? <Content title={'Pantip Realtime'} contentData={realtime} icon={<TimelineIcon />} isMobile={isMobile} setRealtime={setRealtime} /> : <Contentskt isMobile={isMobile} />}
+            {loading ? <Content title={'Pantip Pick'} contentData={pick} icon={<ThumbUpOffAltIcon />} isMobile={isMobile} setRealtime={setPick} /> : <Contentskt isMobile={isMobile} />}
+            {loading ? <Content title={'Pantip Hitz'} contentData={hitz} icon={<WhatshotIcon />} isMobile={isMobile} setRealtime={setHitz} /> : <Contentskt isMobile={isMobile} />}
           </Grid>
           {
             !isMobile &&

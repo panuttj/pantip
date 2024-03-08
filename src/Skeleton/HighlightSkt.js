@@ -1,16 +1,20 @@
-import { React, useState } from 'react';
-import Button from '@mui/material/Button';
+import React, { useState } from 'react'
+import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import StarIcon from '@mui/icons-material/Star';
+import Grid from '@mui/material/Grid';
+import { highlightData } from '../data/Highlight'
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import CardMedia from '@mui/material/CardMedia';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import { RoomsData } from '../data/Rooms'
-import Typography from '@mui/material/Typography';
-import TuneIcon from '@mui/icons-material/Tune';
-import Container from '@mui/material/Container';
+import Skeleton from '@mui/material/Skeleton';
 
-
-function Rooms({ isMobile }) {
-    const slice = isMobile ? 3 : 12
+function HighlightSkt({ isMobile }) {
+    const slice = isMobile ? 1 : 4
     const [activeStep, setActiveStep] = useState(0);
     const handleNext = () => {
         setActiveStep((prevActiveStep) => (prevActiveStep + 1))
@@ -20,29 +24,33 @@ function Rooms({ isMobile }) {
         setActiveStep((prevActiveStep) => Math.max(prevActiveStep - 1, 0));
     };
 
-
     return (
         <Container maxWidth={isMobile ? 'xs' : 'xl'} >
-            <Box sx={{ display: 'flex', flexDirection: 'row', marginLeft: '40px', marginRight: '40px', justifyContent: 'space-between' }}>
-                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '10px', justifyContent: 'center', position: 'relative', paddingLeft: '50px', paddingRight: '70px' }}>
-                    {RoomsData.slice(activeStep, activeStep + slice).map((data, index) => (
-                        <Box key={index} sx={{ display: 'flex', justifyContent: 'center', width: isMobile ? 'auto' : '80px' }}>
-                            <Button sx={{ display: 'flex', flexDirection: 'column' }}>
-                                {data.icon}
-                                <Typography style={{ fontSize: '12px', color: '#000000' }}>
-                                    {data.title}
-                                </Typography>
-                            </Button>
-                        </Box>
+            <Box sx={{ height: 'auto', color: '#000000', padding: '20px', }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                    <Skeleton variant="circular" animation="wave" width={40} height={40} />
+                    <Skeleton variant="text" animation="wave" sx={{ fontSize: '1rem', width: '80px' }} />
+                </Box>
+                <Grid container spacing={2} sx={{ position: 'relative' }} >
+                    {Array.from(new Array(5)).slice(activeStep, activeStep + slice).map((data, index) => (
+                        <Grid key={index} item sm={12} lg={3}>
+                            <Card sx={{ height: '350px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', border: '1px solid #F6F5F5' }}>
+                                <Skeleton sx={{ height: isMobile ? 270 : 200, width: isMobile ? 350 : 'auto' }} animation="wave" variant="rectangular" />
+                                <CardContent sx={{ height: '80px' }}>
+                                    <Skeleton variant="text" sx={{ fontSize: '1rem', width: '250px' }} />
+                                    <Skeleton variant="text" sx={{ fontSize: '1rem', width: '250px' }} />
+                                </CardContent>
+                            </Card>
+                        </Grid>
                     ))}
                     <>
                         <Button
                             onClick={() => handleNext()}
-                            disabled={isMobile ? activeStep > RoomsData.length - 4 : activeStep > RoomsData.length / 2}
+                            disabled={isMobile ? activeStep > highlightData.length - 2 : activeStep > highlightData.length / 5}
                             sx={{
                                 color: '#000000',
                                 position: 'absolute',
-                                right: 25,
+                                right: -10,
                                 top: '50%',
                                 transform: 'translateY(-50%)',
                                 backgroundColor: '#ffffff',
@@ -92,22 +100,10 @@ function Rooms({ isMobile }) {
                             </Button>
                         )}
                     </>
-                </Box>
-                {
-                    !isMobile &&
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Button sx={{ width: '95px', gap: '5px', border: '1px solid #ccc', borderRadius: '13px', height: '40px' }}>
-                            <TuneIcon sx={{ color: '#000000' }} />
-                            <Typography style={{ fontSize: '12px', color: '#000000' }}>
-                                ตัวกรอง
-                            </Typography>
-                        </Button>
-                    </Box>
-                }
-
+                </Grid>
             </Box>
-        </Container >
-    );
+        </Container>
+    )
 }
 
-export default Rooms;
+export default HighlightSkt
