@@ -20,17 +20,18 @@ import Contentskt from './Skeleton/Contentskt';
 import TagHitskt from './Skeleton/TagHitskt';
 import ClubsSkt from './Skeleton/ClubsSkt';
 import WebsitesSkt from './Skeleton/WebsitesSkt';
+import Highlight from './component/Highlight';
 
 function App() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(!loading)
-    }, 1000);
-  }, [])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(!loading)
+  //   }, 1000);
+  // }, [])
 
   return (
     <div style={{ margin: 0, padding: 0, boxSizing: 'border-box' }}>
@@ -39,6 +40,7 @@ function App() {
         {loading ? <Annouce isMobile={isMobile} /> : <Annouceskt />}
         {loading ? <Rooms isMobile={isMobile} /> : <Roomsskt />}
       </div>
+      <Highlight isMobile={isMobile} />
       <Box sx={{ position: 'relative' }}>
         <Grid container spacing={1} >
           <Grid item lg={9} xs={12} >
